@@ -33,7 +33,11 @@ export default {
     },
     methods: {
         registrar() {
-            if(this.password === this.checkPassword) {
+            if (this.password != this.checkPassword) {
+                this.info = 'As senhas digitadas não coincidem'
+            } else if (!this.name || !this.email || !this.password){
+                this.info = 'Digite todos os dados solicitados'
+            } else {
                 return axios.post('http://localhost:8000/api/create-user',{
                     name: this.name,
                     email: this.email,
@@ -50,8 +54,6 @@ export default {
                         error: error
                     });
                 });
-            } else {
-                this.info = 'As senhas digitadas não coincidem'
             }
         }
     }
