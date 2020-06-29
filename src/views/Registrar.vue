@@ -64,8 +64,11 @@ export default {
         margin: 2%;
     }
     .inputs{
+        align-items: center;
         display: flex;
-        justify-content: center;
+        flex-direction: column;
+        margin-left: 25%;
+        width: 50%;
     }
     .message{
         margin: 2%;
