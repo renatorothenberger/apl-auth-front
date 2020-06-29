@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
+    <p>Bem vindo {{user}}</p>
   </div>
 </template>
 
@@ -8,7 +8,13 @@
 
 export default {
   name: 'Home',
-  components: {
-  }
+  data() {
+      return {
+          user: ''
+      };
+  },
+  mounted() {
+    this.user = sessionStorage.getItem('userName')
+  },
 }
 </script>

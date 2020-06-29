@@ -27,28 +27,32 @@ export default {
     },
     methods: {
         login() {
-            
-            return axios.get('http://localhost:8000/api/auth', {
-                params: {
-                    email: this.email,
-                    password:  this.password
-                }
-            },{
-                headers: {
-                    'Content-type': 'application/json',
-                }
-            }).then((response) => {
-                if (response.data.token) {
-                    this.$router.replace('/')
-                } else {
-                    this.info = response.data
-
-                }
-            }).catch(error => {
-                console.log({
-                    error: error
+            if(!this.email || !this.password){
+                this.info = 'Preencha o e-mail e a senha'
+            } else {
+                return axios.get('http://localhost:8000/api/auth', {
+                    params: {
+                        email: this.email,
+                        password:  this.password
+                    }
+                },{
+                    headers: {
+                        'Content-type': 'application/json',
+                    }
+                }).then((response) => {
+                    if (response.data.token) {
+                        sessionStorage.setItem('userName', response.data.name)
+                        this.$router.replace('/home')
+                    } else {
+                        this.info = response.data
+    
+                    }
+                }).catch(error => {
+                    console.log({
+                        error: error
+                    });
                 });
-            });
+            }
         }
     }
 };
